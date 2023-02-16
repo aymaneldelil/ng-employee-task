@@ -1,1 +1,26 @@
-<p>dashboard works!</p>
+<section class="dashboard">
+    <mat-drawer-container class="example-container" autosize>
+        <mat-drawer #drawer class="example-sidenav" mode="side">
+            <p>Auto-resizing sidenav</p>
+            <p *ngIf="true">Lorem, ipsum dolor sit amet consectetur.</p>
+
+        </mat-drawer>
+
+        <div class="example-sidenav-content">
+            <!-- <button type="button" mat-button (click)="drawer.toggle()">
+            Toggle sidenav
+          </button> -->
+        </div>
+        <section class="dashboard-content">
+            <div class="content-header">
+                <dashboard-card cardIcon="" cardCount="" cardTitle=""></dashboard-card>
+            </div>
+           
+        </section>
+
+    </mat-drawer-container>
+
+
+
+
+</section>
