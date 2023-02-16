@@ -1,11 +1,13 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Iemployee } from 'src/app/core/interfaces/iemployee';
 import { DummydatabasesService } from 'src/app/shared/services/dummydatabases.service';
 import { EmployeeService } from 'src/app/shared/services/employee.service';
+import { EmployeeDialogComponent } from '../employee-dialog/employee-dialog.component';
 
 @Component({
   selector: 'app-dashboard-table',
@@ -21,7 +23,8 @@ export class DashboardTableComponent implements OnInit {
     'gender',
     'department',
     'position',
-    'action',
+    'update',
+    'remove',
   ];
   dataSource!: MatTableDataSource<any>;
 
@@ -40,9 +43,8 @@ export class DashboardTableComponent implements OnInit {
   getEmployeeList() {
     this._dbSVC.getEmployee().subscribe({
       next: (res) => {
-        console.log(res);
         this.dataSource = new MatTableDataSource(res);
-        this.dataSource.sort = this.sort;
+        // this.dataSource.sort = this.sort;
         this.dataSource.paginator = this.paginator;
       },
       error: console.log,
@@ -51,7 +53,11 @@ export class DashboardTableComponent implements OnInit {
 
   // @ViewChild('addEmployee')
   // addEmployee!: TemplateRef<any>;
-  constructor(private _dialog: MatDialog, private _dbSVC: DummydatabasesService) {}
+  constructor(
+    private _dialog: MatDialog,
+    private _dbSVC: DummydatabasesService,
+    private _snackBar: MatSnackBar
+  ) {}
   //-------------------------------------------------------------------------------------------------------------------------------------------
 
   applyFilter(event: Event) {
@@ -61,28 +67,26 @@ export class DashboardTableComponent implements OnInit {
     //   this.dataSource.paginator.firstPage();
     // }
   }
-  //-------------------------------------------------------------------------------------------------------------------------------------------
-
-  deleteEmployee(id: number) {
-    // this._empService.deleteEmployee(id).subscribe({
-    //   next: (res) => {
-    //     this._coreService.openSnackBar('Employee deleted!', 'done');
-    //     this.getEmployeeList();
-    //   },
-    //   error: console.log,
-    // });
+  //-------------------------------------------------------------------------------------------------------------------------------------------------
+  deleteEmployee(id: string) {
+    console.log(id);
+    this._dbSVC.removeEmploye(id).subscribe({
+      next: (n) => {
+        this.dataSource = new MatTableDataSource(n);        
+      },
+    });
   }
-
+//-------------------------------------------------------------------------------------------------------------------------------------------------
   openEditForm(data: any) {
-    // const dialogRef = this._dialog.open(EmpAddEditComponent, {
-    //   data,
-    // });
-    // dialogRef.afterClosed().subscribe({
-    //   next: (val) => {
-    //     if (val) {
-    //       this.getEmployeeList();
-    //     }
-    //   },
-    // });
+    const dialogRef = this._dialog.open(EmployeeDialogComponent, {
+      data,
+    });
+    dialogRef.afterClosed().subscribe({
+      next: (val) => {
+        if (val) {
+          this.getEmployeeList();
+        }
+      },
+    });
   }
 }
