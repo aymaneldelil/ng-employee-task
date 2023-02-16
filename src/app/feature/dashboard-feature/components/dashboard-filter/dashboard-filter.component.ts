@@ -23,13 +23,8 @@ import { PositionService } from 'src/app/shared/services/position.service';
   styleUrls: ['./dashboard-filter.component.scss'],
 })
 export class DashboardFilterComponent implements OnInit {
-  @ViewChild('filterForm')
-  filterForm!: TemplateRef<any>;
-  @ViewChild('addEmployee')
-  addEmployee!: TemplateRef<any>;
-
   // FORM GROUP
-  public employeeForm!: FormGroup;
+  public filterForm!: FormGroup;
 
   //
   public departments: Idepartment[] = [];
@@ -39,24 +34,22 @@ export class DashboardFilterComponent implements OnInit {
 
   //----------------------------------------------------------
   constructor(
-    private _dialog: MatDialog,
     private _empSVC: EmployeeService,
     private _fb: FormBuilder,
-    private _departmentSVC: DepartmentService,
+    private _db: DummydatabasesService,
     private _positionSVC: PositionService,
-    private _router: Router,
     private _DB: DummydatabasesService
   ) {}
   //-------------------------------------------------------------------------------------------------------------------------------------------
 
   ngOnInit(): void {
-    this.addEmpForm();
+    this.initialForm();
     this.initialValues();
   }
-  private addEmpForm() {
-    this.employeeForm = this._fb.group({
+  private initialForm() {
+    this.filterForm = this._fb.group({
       firstName: [
-        'Ayman',
+        null,
         [
           Validators.required,
           Validators.pattern(/^[A-Za-z]+$/),
@@ -64,50 +57,35 @@ export class DashboardFilterComponent implements OnInit {
         ],
       ],
       lastName: [
-        'Mostafa',
+        null,
         [
           Validators.required,
           Validators.pattern(/^[A-Za-z]+$/),
           Validators.minLength(3),
         ],
       ],
-      gender: ['Male', [Validators.required]],
+      gender: [null, [Validators.required]],
       email: [
-        'ayman@yahoo.com',
+        null,
         [
           Validators.required,
           Validators.pattern(/[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/),
         ],
       ],
-      department: ['', [Validators.required]],
-      position: ['', [Validators.required]],
+      department: [null, [Validators.required]],
+      position: [null, [Validators.required]],
     });
   }
   //-------------------------------------------------------------------------------------------------------------------------------------------
 
-  openFilterDialog() {
-    
-    const dialogRef = this._dialog.open(this.filterForm)
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
-    });
-  }
-
-  //-------------------------------------------------------------------------------------------------------------------------------------------
-  openAddDialog() {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.minWidth = '400px'
-
-    dialogConfig.maxWidth = '600px'
-    const dialogRef = this._dialog.open(this.addEmployee);
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
-    });
-  }
   //-------------------------------------------------------------------------------------------------------------------------------------------
 
   private initialValues() {
-    this.departments = this._departmentSVC.getDepartments();
+    this._DB.getDepartment().subscribe({
+      next: (n) => {
+        this.departments = n;
+      },
+    });
   }
   //-------------------------------------------------------------------------------------------------------------------------------------------
 

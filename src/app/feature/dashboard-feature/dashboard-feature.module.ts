@@ -8,11 +8,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DepartmentService } from 'src/app/shared/services/department.service';
 import { EmployeeService } from 'src/app/shared/services/employee.service';
 import { PositionService } from 'src/app/shared/services/position.service';
+import { EmployeeDialogComponent } from './components/employee-dialog/employee-dialog.component';
 @NgModule({
   declarations: [
     DashboardTableComponent,
     DashboardFilterComponent,
     DashboardActionsComponent,
+EmployeeDialogComponent
+
   ],
   imports: [
     CommonModule,
@@ -20,8 +23,7 @@ import { PositionService } from 'src/app/shared/services/position.service';
     FormsModule,
     ReactiveFormsModule,
   ],
-  exports: [DashboardTableComponent, DashboardFilterComponent],
-  
+  exports: [DashboardTableComponent, DashboardFilterComponent  ,  EmployeeDialogComponent],
   providers:[
     DepartmentService , EmployeeService , PositionService
   ]

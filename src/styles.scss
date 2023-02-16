@@ -61,7 +61,7 @@ body {
 
   .group {
     width: 50%;
-    max-width: 100px;
+    min-width: 150px;
     height: 150px;
     display: flex;
     flex-direction: column;

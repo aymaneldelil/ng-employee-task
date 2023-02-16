@@ -9,132 +9,38 @@ import { from, Observable, of } from 'rxjs';
 })
 //----------------------------------------------------------------------------------------------------------------------------------------------
 export class DummydatabasesService {
-  private dummyEmp: Array<Iemployee> = [
-    {
-      id: '1001',
-      firstName: 'Ayman',
-      lastName: 'Mostafa',
-      email: 'ayman@yahoo.com',
-      department: '',
-      gender: 'Male',
-      position: 'Junior Front End',
-    },
-    {
-      id: '1002',
-      firstName: 'Ahmed',
-      lastName: 'Mostafa',
-      email: 'ahmed@yahoo.com',
-      department: '',
-      gender: 'Male',
-      position: 'Junior Front End',
-    },
-    {
-      id: '1001',
-      firstName: 'Mohamed',
-      lastName: 'Ahmed',
-      email: 'ayman@yahoo.com',
-      department: '',
-      gender: 'Male',
-      position: 'Junior Front End',
-    },
-    {
-      id: '1001',
-      firstName: 'Ayman',
-      lastName: 'Mostafa',
-      email: 'ayman@yahoo.com',
-      department: '',
-      gender: 'Male',
-      position: 'Junior Front End',
-    },
-    {
-      id: '1001',
-      firstName: 'Ayman',
-      lastName: 'Mostafa',
-      email: 'ayman@yahoo.com',
-      department: '',
-      gender: 'Male',
-      position: 'Junior Front End',
-    },
-  ];
+  private dummyEmp: Array<Iemployee> = [];
   //---------------------------------------------------------------------------------------------------------------------------------------------
-  private dummyDepartments: Array<Idepartment> = [
-    {
-      id: '2001',
-      icon: 'groups',
-      name: 'Human resources',
-    },
-    {
-      id: '2002',
-      icon: 'support_agent',
-      name: 'Customer service',
-    },
-    {
-      id: '2003',
-      icon: 'monetization_on',
-      name: 'Accounting and finance',
-    },
-    {
-      id: '2004',
-      icon: 'add_business',
-      name: 'Marketing and sales',
-    },
-    {
-      id: '2005',
-      icon: 'lan',
-      name: 'Information technology',
-    },
-  ];
+  private dummyDepartments: Array<Idepartment> = [];
   //---------------------------------------------------------------------------------------------------------------------------------------------
-  private DummyPositions: Array<Iposition<string>> = [
-    {
-      departmentId: '2001',
-      positions: [
-        'Human resources Manger',
-        'Human resources Employee',
-        'Human resources Intership',
-      ],
-    },
-    {
-      departmentId: '2002',
+  private DummyPositions: Array<Iposition<string>> = [];
+  constructor() {
+    if (localStorage.getItem('dummyEmp') !== null) {
+      this.dummyEmp = JSON.parse(localStorage.getItem('dummyEmp')!);
+    }
+    //---------------------------------------------------------------------------------------------------------------------------------------------
 
-      positions: [
-        'Customer service Manger',
-        'Customer services Employee',
-        'Customer service Intership',
-      ],
-    },
-    {
-      departmentId: '2003',
-      positions: [
-        'Chief Accounting Officer',
-        'Vice presdepartmentIdent of Accounting and Finance',
-        'Accounting Manager',
-        'Accountant',
-      ],
-    },
-    {
-      departmentId: '2004',
-      positions: [
-        'Marketing Manager',
-        'Director Of marketing',
-        'Marketing Specialist',
-      ],
-    },
-    {
-      departmentId: '2005',
-      positions: [
-        'IT consultant',
-        'IT Project Manager',
-        'Software Engineer',
-        'Full-stack Developer',
-        'Font-end Developer',
-        'Software Tester',
-      ],
-    },
-  ];
-  constructor() {}
+    if (localStorage.getItem('dummyDepartments') !== null) {
+      this.dummyDepartments = JSON.parse(
+        localStorage.getItem('dummyDepartments')!
+      );
+    }
+
+    //---------------------------------------------------------------------------------------------------------------------------------------------
+    if (localStorage.getItem('DummyPositions') !== null) {
+      this.DummyPositions = JSON.parse(localStorage.getItem('DummyPositions')!);
+    }
+  }
 
   getEmployee(): Observable<Array<Iemployee>> {
     return of(this.dummyEmp);
+  }
+  //---------------------------------------------------------------------------------------------------------------------------------------------
+  getDepartment(): Observable<Array<Idepartment>> {
+    return of(this.dummyDepartments);
+  }
+  //---------------------------------------------------------------------------------------------------------------------------------------------
+  getPositions(): Observable<Array<Iposition<string>>> {
+    return of(this.DummyPositions);
   }
 }

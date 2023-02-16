@@ -3,13 +3,20 @@
 //------------------------------------------------------------------------------------------------
 
 .dashboard {
-    .dashboard-content {
-        .container {
+    .container {
+        .dialog {
+            @include display-flex();
+
+
+        }
+
+        .dashboard-content {
+
             .content-header {
                 @include display-flex();
                 @include justify-content(space-evenly);
             }
-        
+
         }
     }
 
