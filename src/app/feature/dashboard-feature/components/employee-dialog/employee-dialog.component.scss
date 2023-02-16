@@ -1,10 +1,32 @@
+@use '../../../../style/' as *;
+
+//--------------------------------------------------------------
+.employee-dialog {
 
 
 
-.employee-dialog{
-    background-color: red;
 
-    .container{
-        
+    display: flex;
+    flex-direction: column;
+
+    .employeeForm {
+        max-width: 600px;
+
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+
+        .group {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: 10px 0;
+        }
+
+        // .mat-mdc-form-field {
+        //     width: 30%;
+        // }
     }
+
 }
