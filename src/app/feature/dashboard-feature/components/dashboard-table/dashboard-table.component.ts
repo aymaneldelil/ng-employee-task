@@ -77,7 +77,7 @@ export class DashboardTableComponent implements OnInit {
     });
   }
 //-------------------------------------------------------------------------------------------------------------------------------------------------
-  openEditForm(data: any) {
+  openEditForm(data: Iemployee) {
     const dialogRef = this._dialog.open(EmployeeDialogComponent, {
       data,
     });

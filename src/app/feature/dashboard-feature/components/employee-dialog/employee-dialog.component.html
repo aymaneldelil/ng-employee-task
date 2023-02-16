@@ -3,16 +3,23 @@
         <h3>Add New Employee</h3>
         <form [formGroup]="employeeForm" class="addEmployeeDialog">
 
+            <mat-form-field appearance="outline">
+                <mat-label>Employee ID</mat-label>
+                <input matInput formControlName="id">
+                <mat-error *ngIf="employeeForm.get(['id'])?.hasError('required')">This field is
+                    required</mat-error>
+            </mat-form-field>
             <div class="group">
+
                 <mat-form-field appearance="outline">
                     <mat-label>First Name</mat-label>
-                    <input matInput formControlName="first_name">
-                    <mat-error *ngIf="employeeForm.get(['first_name'])?.hasError('required')">This field is
+                    <input matInput formControlName="firstName">
+                    <mat-error *ngIf="employeeForm.get(['firstName'])?.hasError('required')">This field is
                         required</mat-error>
-                    <mat-error *ngIf="employeeForm.get(['first_name'])?.hasError('pattern')">The first name shoud be
+                    <mat-error *ngIf="employeeForm.get(['firstName'])?.hasError('pattern')">The first name shoud be
                         in
                         alphabetic character</mat-error>
-                    <mat-error *ngIf="employeeForm.get(['first_name'])?.hasError('minlength')">Are you kidding ,
+                    <mat-error *ngIf="employeeForm.get(['firstName'])?.hasError('minlength')">Are you kidding ,
                         there
                         is no
                         name less than 3 characters </mat-error>
@@ -20,13 +27,13 @@
                 <!-- --------------------------------------------------------------------------------------------->
                 <mat-form-field appearance="outline">
                     <mat-label>Last Name</mat-label>
-                    <input matInput formControlName="last_name">
-                    <mat-error *ngIf="employeeForm.get(['last_name'])?.hasError('required')">This field is
+                    <input matInput formControlName="lastName">
+                    <mat-error *ngIf="employeeForm.get(['lastName'])?.hasError('required')">This field is
                         required</mat-error>
-                    <mat-error *ngIf="employeeForm.get(['last_name'])?.hasError('pattern')">The last name shoud be
+                    <mat-error *ngIf="employeeForm.get(['lastName'])?.hasError('pattern')">The last name shoud be
                         in
                         alphabetic character</mat-error>
-                    <mat-error *ngIf="employeeForm.get(['last_name'])?.hasError('minlength')">Are you kidding ,
+                    <mat-error *ngIf="employeeForm.get(['lastName'])?.hasError('minlength')">Are you kidding ,
                         there is
                         no
                         name less than 3 characters </mat-error>
@@ -56,8 +63,8 @@
 
                 <mat-form-field appearance="outline">
                     <mat-label>Department</mat-label>
-                    <mat-select [(ngModel)]="selectedDepartmentId" (ngModelChange)="onSelectedDep($event)"
-                        formControlName="department">
+                    <mat-select [(ngModel)]="selectedDepartmentId" [value]="employeeForm.get(['department'])"
+                        (ngModelChange)="onSelectedDep($event)" formControlName="department">
                         <mat-option *ngFor="let d of departments" [value]="d.id">
                             {{d.name}}
                         </mat-option>
@@ -80,5 +87,6 @@
 </div>
 <div mat-dialog-actions class="action">
     <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel</button>
-    <!-- <button mat-raised-button color="primary" type="submit">{{data ? 'Update': 'Save'}}</button> -->
+    <button mat-raised-button color="primary" type="submit" [mat-dialog-close]="false" (click)="updateEmp()">{{data ?
+        'Update': 'Add Employee'}}</button>
 </div>
