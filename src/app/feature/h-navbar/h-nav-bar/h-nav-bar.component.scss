@@ -1,0 +1,25 @@
+@use '../../../style/index' as *;
+
+//---------------------------------------------------------------------------------------------------------------------------------------------
+nav {
+    background-color: white;
+
+    .container {
+
+        @include display-flex();
+
+        @include justify-content(space-between);
+
+        .nav-img {
+
+            .logo {
+                width: 150px
+            }
+
+        }
+
+        .nav-data {
+            
+        }
+    }
+}
