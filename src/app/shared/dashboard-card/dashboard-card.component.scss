@@ -1,12 +1,45 @@
-
-
+@use '../../style/index' as *;
 //--------------------------------------------------------------------------------------------------------------------------------------------
 
-.dashboard-card{
-    .card-icon{
+.dashboard-card {
+    margin: $size ;
+    width: 300px;
+    @include display-flex();
+    justify-content: center;
+    align-items: center;
+    background-color: $white;
+    @include border-radius($size * 3);
+    box-shadow: $box-shadow;
+
+    .card-icon {
+        width: 100px;
+        height: 100px;
+        background-color: $secondary;
+        border-radius: 50%;
+
+        @include display-flex();
+        justify-content: center;
+        align-items: center;
+
+        .mat-icons {
+            width: 50px;
+            height: 50px;
+        }
+        .material-icons {
+            font-size: calc($size *3);
+        }
 
     }
-    .card-count{
-        
+    .card-body {
+
+        .card-title {
+            span{
+                color: $primary-dark;
+                font-weight: 600;
+                font-size: calc($size *2);
+            }  
+        }
+
+        .card-count {}
     }
 }
