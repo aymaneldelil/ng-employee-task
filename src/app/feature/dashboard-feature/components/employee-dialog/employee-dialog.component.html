@@ -1,0 +1,84 @@
+<div mat-dialog-content>
+    <div class="container">
+        <h3>Add New Employee</h3>
+        <form [formGroup]="employeeForm" class="addEmployeeDialog">
+
+            <div class="group">
+                <mat-form-field appearance="outline">
+                    <mat-label>First Name</mat-label>
+                    <input matInput formControlName="first_name">
+                    <mat-error *ngIf="employeeForm.get(['first_name'])?.hasError('required')">This field is
+                        required</mat-error>
+                    <mat-error *ngIf="employeeForm.get(['first_name'])?.hasError('pattern')">The first name shoud be
+                        in
+                        alphabetic character</mat-error>
+                    <mat-error *ngIf="employeeForm.get(['first_name'])?.hasError('minlength')">Are you kidding ,
+                        there
+                        is no
+                        name less than 3 characters </mat-error>
+                </mat-form-field>
+                <!-- --------------------------------------------------------------------------------------------->
+                <mat-form-field appearance="outline">
+                    <mat-label>Last Name</mat-label>
+                    <input matInput formControlName="last_name">
+                    <mat-error *ngIf="employeeForm.get(['last_name'])?.hasError('required')">This field is
+                        required</mat-error>
+                    <mat-error *ngIf="employeeForm.get(['last_name'])?.hasError('pattern')">The last name shoud be
+                        in
+                        alphabetic character</mat-error>
+                    <mat-error *ngIf="employeeForm.get(['last_name'])?.hasError('minlength')">Are you kidding ,
+                        there is
+                        no
+                        name less than 3 characters </mat-error>
+                </mat-form-field>
+            </div>
+            <!-- --------------------------------------------------------------------------------------------->
+            <div class="group">
+                <mat-button-toggle-group formControlName="gender" aria-label="Font Style">
+                    <mat-button-toggle value="Male">
+                        <mat-icon>male</mat-icon>Male</mat-button-toggle>
+                    <mat-button-toggle value="Female">
+                        <mat-icon>female</mat-icon>
+                        Female</mat-button-toggle>
+                </mat-button-toggle-group>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Email Address</mat-label>
+                    <input matInput formControlName="email">
+                    <mat-error *ngIf="employeeForm.get(['email'])?.hasError('required')">This field is
+                        required</mat-error>
+                    <mat-error *ngIf="employeeForm.get(['email'])?.hasError('pattern')">Please enter valid email
+                        Address</mat-error>
+                </mat-form-field>
+            </div>
+            <!-- --------------------------------------------------------------------------------------------->
+            <div class="group">
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Department</mat-label>
+                    <mat-select [(ngModel)]="selectedDepartmentId" (ngModelChange)="onSelectedDep($event)"
+                        formControlName="department">
+                        <mat-option *ngFor="let d of departments" [value]="d.id">
+                            {{d.name}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <!-- --------------------------------------------------------------------------------------------->
+                <mat-form-field appearance="outline">
+                    <mat-label>Position</mat-label>
+                    <mat-select formControlName="position">
+                        <mat-option *ngFor="let p of positions" [value]="p">
+                            {{p}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <!-- --------------------------------------------------------------------------------------------->
+        </form>
+    </div>
+</div>
+<div mat-dialog-actions class="action">
+    <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel</button>
+    <button mat-raised-button color="primary" type="submit">{{data ? 'Update': 'Save'}}</button>
+</div>
