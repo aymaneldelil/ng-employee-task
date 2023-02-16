@@ -5,15 +5,14 @@ import { AngularMaterialModule } from '../angular-material/angular-material.modu
 import { DashboardFilterComponent } from './components/dashboard-filter/dashboard-filter.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DepartmentService } from 'src/app/shared/services/department.service';
-import { EmployeeService } from 'src/app/shared/services/employee.service';
 import { PositionService } from 'src/app/shared/services/position.service';
 import { EmployeeDialogComponent } from './components/employee-dialog/employee-dialog.component';
+import { DummydatabasesService } from 'src/app/shared/services/dummydatabases.service';
 @NgModule({
   declarations: [
     DashboardTableComponent,
     DashboardFilterComponent,
-EmployeeDialogComponent
-
+    EmployeeDialogComponent,
   ],
   imports: [
     CommonModule,
@@ -21,9 +20,15 @@ EmployeeDialogComponent
     FormsModule,
     ReactiveFormsModule,
   ],
-  exports: [DashboardTableComponent, DashboardFilterComponent  ,  EmployeeDialogComponent],
-  providers:[
-    DepartmentService , EmployeeService , PositionService
-  ]
+  exports: [
+    DashboardTableComponent,
+    DashboardFilterComponent,
+    EmployeeDialogComponent,
+  ],
+  providers: [
+    DepartmentService,
+    PositionService,
+    DummydatabasesService,
+  ],
 })
 export class DashboardFeatureModule {}

@@ -25,7 +25,6 @@ export class PositionService {
         return m.filter((m) => m.departmentId === selectedDepID);
       }),
       take(1),
-      tap((t) => console.log(t))
     );
   }
 }

@@ -3,64 +3,88 @@ import { Idepartment } from '../../core/interfaces/idepartment';
 
 import { Iemployee } from '../../core/interfaces/iemployee';
 import { Iposition } from '../../core/interfaces/iposition';
-import { filter, from, map, Observable, of, tap, toArray } from 'rxjs';
-@Injectable({
-  providedIn: 'root',
-})
+import {
+  BehaviorSubject,
+  filter,
+  from,
+  map,
+  Observable,
+  of,
+  Subject,
+  tap,
+  toArray,
+} from 'rxjs';
+@Injectable()
 //----------------------------------------------------------------------------------------------------------------------------------------------
 export class DummydatabasesService {
-  private dummyEmp: Array<Iemployee> = [];
+  private RXlocalSotrage = new Subject<any>();
+  public employees$ = new BehaviorSubject<Array<Iemployee>>([]);
   //---------------------------------------------------------------------------------------------------------------------------------------------
-  private dummyDepartments: Array<Idepartment> = [];
+  private departments$ = new BehaviorSubject<Array<Idepartment>>([]);
   //---------------------------------------------------------------------------------------------------------------------------------------------
-  private DummyPositions: Array<Iposition<string>> = [];
+  private positions$ = new BehaviorSubject<Array<Iposition<string>>>([]);
+  //---------------------------------------------------------------------------------------------------------------------------------------------
   constructor() {
-    if (localStorage.getItem('dummyEmp') !== null) {
-      this.dummyEmp = JSON.parse(localStorage.getItem('dummyEmp')!);
+    if (!!localStorage.getItem('dummyEmp')) {
+      this.employees$.next(JSON.parse(localStorage.getItem('dummyEmp')!));
     }
     //---------------------------------------------------------------------------------------------------------------------------------------------
 
-    if (localStorage.getItem('dummyDepartments') !== null) {
-      this.dummyDepartments = JSON.parse(
-        localStorage.getItem('dummyDepartments')!
+    if (!!localStorage.getItem('dummyDepartments')) {
+      this.departments$.next(
+        JSON.parse(localStorage.getItem('dummyDepartments')!)
       );
     }
 
     //---------------------------------------------------------------------------------------------------------------------------------------------
-    if (localStorage.getItem('DummyPositions') !== null) {
-      this.DummyPositions = JSON.parse(localStorage.getItem('DummyPositions')!);
+    if (!!localStorage.getItem('dummyPositions')) {
+      this.positions$.next(JSON.parse(localStorage.getItem('dummyPositions')!));
     }
   }
   //---------------------------------------------------------------------------------------------------------------------------------------------
   public getEmployee(): Observable<Array<Iemployee>> {
-    return of(this.dummyEmp);
+    return this.employees$;
   }
   //---------------------------------------------------------------------------------------------------------------------------------------------
   public getDepartment(): Observable<Array<Idepartment>> {
-    return of(this.dummyDepartments);
+    return this.departments$;
   }
   //---------------------------------------------------------------------------------------------------------------------------------------------
   public getPositions(): Observable<Array<Iposition<string>>> {
-    return of(this.DummyPositions);
+    
+    this.positions$.subscribe((s)=>console.log(s)
+    )
+    return this.positions$;
   }
   //---------------------------------------------------------------------------------------------------------------------------------------------
+  public addEmployeeDB(type: string, newValue: any) {
+    let oldData: Array<any> = JSON.parse(localStorage.getItem(type)!);
+    oldData.push(newValue);
+    localStorage.setItem(type, JSON.stringify(oldData));
+    this.employees$.next(oldData);
+  }
+  //---------------------------------------------------------------------------------------------------------------------------------------------
+
   public updateDB(type: string, newValue: any) {
     let oldData: Array<any> = JSON.parse(localStorage.getItem(type)!);
     oldData.push(newValue);
     localStorage.setItem(type, JSON.stringify(oldData));
+    this.employees$.next(oldData);
   }
   //---------------------------------------------------------------------------------------------------------------------------------------------
   public removeEmploye(id: string) {
     let empList: Array<Iemployee> = JSON.parse(
       localStorage.getItem('dummyEmp')!
     );
-    return from(empList).pipe(
+    from(empList).pipe(
       filter((f) => {
         return f.id !== id;
       }),
       toArray(),
-      tap((t)=>{
-        localStorage.setItem("dummyEmp" , JSON.stringify(t))
+      tap((t) => {
+        localStorage.setItem('dummyEmp', JSON.stringify(t));
+         this.employees$.next(t);
+         return  this.employees$
       })
     );
   }

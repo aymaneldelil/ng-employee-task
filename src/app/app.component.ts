@@ -15,45 +15,45 @@ export class AppComponent implements OnInit {
       firstName: 'Ayman',
       lastName: 'Mostafa',
       email: 'ayman@yahoo.com',
-      department: '',
+      department: 'Information technology',
       gender: 'Male',
-      position: 'Human resources Manger',
+      position: 'Software Tester',
     },
     {
       id: '1002',
       firstName: 'Ahmed',
       lastName: 'Mostafa',
       email: 'ahmed@yahoo.com',
-      department: '',
+      department: 'Accounting and finance',
       gender: 'Male',
-      position: 'Junior Front End',
+      position: 'Accounting Manager',
     },
     {
-      id: '1001',
+      id: '1007',
       firstName: 'Mohamed',
       lastName: 'Ahmed',
       email: 'ayman@yahoo.com',
-      department: '',
+      department: 'Marketing and sales',
       gender: 'Male',
       position: 'Junior Front End',
     },
     {
-      id: '1001',
-      firstName: 'Ayman',
-      lastName: 'Mostafa',
+      id: '1008',
+      firstName: 'Abdelsalam',
+      lastName: 'Ragab',
       email: 'ayman@yahoo.com',
-      department: '',
+      department: 'Accounting and finance',
       gender: 'Male',
-      position: 'Junior Front End',
+      position: 'Director Of marketing',
     },
     {
-      id: '1001',
-      firstName: 'Ayman',
-      lastName: 'Mostafa',
-      email: 'ayman@yahoo.com',
-      department: '',
+      id: '1009',
+      firstName: 'Hossam',
+      lastName: 'Ibrahiem',
+      email: 'hosam@yahoo.com',
+      department: 'Customer service',
       gender: 'Male',
-      position: 'Junior Front End',
+      position: 'Customer services Employee',
     },
   ];
   //---------------------------------------------------------------------------------------------------------------------------------------------
@@ -143,8 +143,8 @@ export class AppComponent implements OnInit {
     }
 
      //-------------------------------------------------------------
-     if (localStorage.getItem('DummyPositions') == null) {
-      localStorage.setItem('DummyPositions', JSON.stringify(this.DummyPositions));
+     if (localStorage.getItem('dummyPositions') == null) {
+      localStorage.setItem('dummyPositions', JSON.stringify(this.DummyPositions));
     }
   }
 }

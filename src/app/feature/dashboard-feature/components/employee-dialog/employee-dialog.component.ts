@@ -5,12 +5,9 @@ import {
   MatDialogRef,
   MAT_DIALOG_DATA,
 } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 import { Idepartment } from 'src/app/core/interfaces/idepartment';
 import { Iemployee } from 'src/app/core/interfaces/iemployee';
-import { DepartmentService } from 'src/app/shared/services/department.service';
 import { DummydatabasesService } from 'src/app/shared/services/dummydatabases.service';
-import { EmployeeService } from 'src/app/shared/services/employee.service';
 import { PositionService } from 'src/app/shared/services/position.service';
 //-------------------------------------------------------------------------------------
 @Component({
@@ -27,9 +24,7 @@ export class EmployeeDialogComponent implements OnInit {
   public employeeForm!: FormGroup;
 
   constructor(
-    private _empSVC: EmployeeService,
     private _fb: FormBuilder,
-    private _departmentSVC: DepartmentService,
     private _positionSVC: PositionService,
     private _dialogRef: MatDialogRef<EmployeeDialogComponent>,
 
@@ -104,8 +99,12 @@ export class EmployeeDialogComponent implements OnInit {
     });
   }
   //-------------------------------------------------------------------------------------------------------------------------------------------
-  public updateEmp() {
-    this._DB.updateDB('dummyEmp', this.employeeForm.value)
+  public onUpdateEmp() {
+    this._DB.updateDB('dummyEmp', this.employeeForm.value);
     this._dialogRef.close(true);
+  }
+  //-------------------------------------------------------------------------------------------------------------------------------------------
+  public onAddEmp() {
+    this._DB.addEmployeeDB('dummyEmp', this.employeeForm.value)
   }
 }

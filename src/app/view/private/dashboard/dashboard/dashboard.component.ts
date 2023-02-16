@@ -6,11 +6,6 @@ import {
   ViewChild,
 } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { MatPaginator } from '@angular/material/paginator';
-import { MatTableDataSource } from '@angular/material/table';
-import { Iemployee } from 'src/app/core/interfaces/iemployee';
-import { MatSort } from '@angular/material/sort';
-import { EmployeeService } from 'src/app/shared/services/employee.service';
 import { EmployeeDialogComponent } from 'src/app/feature/dashboard-feature/components/employee-dialog/employee-dialog.component';
 import { DashboardFilterComponent } from 'src/app/feature/dashboard-feature/components/dashboard-filter/dashboard-filter.component';
 import { Idepartment } from 'src/app/core/interfaces/idepartment';

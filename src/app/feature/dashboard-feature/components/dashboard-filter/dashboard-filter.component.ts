@@ -7,12 +7,8 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
-import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 import { Idepartment } from 'src/app/core/interfaces/idepartment';
-import { DepartmentService } from 'src/app/shared/services/department.service';
 import { DummydatabasesService } from 'src/app/shared/services/dummydatabases.service';
-import { EmployeeService } from 'src/app/shared/services/employee.service';
 import { PositionService } from 'src/app/shared/services/position.service';
 
 //--------------------------------------------------------------------------------------------------------------------
@@ -34,7 +30,6 @@ export class DashboardFilterComponent implements OnInit {
 
   //----------------------------------------------------------
   constructor(
-    private _empSVC: EmployeeService,
     private _fb: FormBuilder,
     private _db: DummydatabasesService,
     private _positionSVC: PositionService,
