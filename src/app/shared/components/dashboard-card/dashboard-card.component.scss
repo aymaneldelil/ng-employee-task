@@ -3,9 +3,10 @@
 
 .dashboard-card {
     margin: $size ;
-    width: 300px;
+    width: 250px;
     @include display-flex();
-    justify-content: center;
+    @include justify-content(space-evenly);
+
     align-items: center;
     background-color: $white;
     @include border-radius($size * 3);
@@ -14,21 +15,7 @@
     .card-icon {
         width: 100px;
         height: 100px;
-        background-color: $secondary;
         border-radius: 50%;
-
-        @include display-flex();
-        justify-content: center;
-        align-items: center;
-
-        .mat-icons {
-            width: 50px;
-            height: 50px;
-        }
-        .material-icons {
-            font-size: calc($size *3);
-        }
-
     }
     .card-body {
 
