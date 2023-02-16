@@ -1,4 +1,11 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { CdkTableDataSourceInput } from '@angular/cdk/table';
+import {
+  Component,
+  Input,
+  OnInit,
+  TemplateRef,
+  ViewChild,
+} from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -26,10 +33,12 @@ export class DashboardTableComponent implements OnInit {
     'update',
     'remove',
   ];
-  dataSource!: MatTableDataSource<Iemployee>;
+  // public dataSource!: MatTableDataSource<Iemployee>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  @Input()
+  dataSource!: CdkTableDataSourceInput<Iemployee>;
 
   ngOnInit(): void {
     this.getEmployeeList();
@@ -38,10 +47,12 @@ export class DashboardTableComponent implements OnInit {
   private getEmployeeList() {
     return this._dbSVC.getEmployee().subscribe({
       next: (res) => {
-        console.log(" Need to updata The Table");
+        console.log(' Need to updata The Table');
+        console.log(res);
+
         this.dataSource = new MatTableDataSource(res);
-        this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator;
+        // this.dataSource.sort = this.sort;
+        // this.dataSource.paginator = this.paginator;
       },
       error: console.log,
     });
@@ -66,22 +77,18 @@ export class DashboardTableComponent implements OnInit {
   //-------------------------------------------------------------------------------------------------------------------------------------------------
   deleteEmployee(id: string) {
     console.log(id);
-    this._dbSVC.removeEmploye(id)
+    this._dbSVC.removeEmploye(id).subscribe()
   }
   //-------------------------------------------------------------------------------------------------------------------------------------------------
-  testOBS(){
-    this._dbSVC.getEmployee().subscribe(
-      {
-        next:(n)=>{
-          console.log(n);
-          
-        },
-        error:(e)=>{
-          console.log(e);
-          
-        }
-      }
-    )
+  testOBS() {
+    this._dbSVC.getEmployee().subscribe({
+      next: (n) => {
+        console.log(n);
+      },
+      error: (e) => {
+        console.log(e);
+      },
+    });
   }
   //-------------------------------------------------------------------------------------------------------------------------------------------------
 

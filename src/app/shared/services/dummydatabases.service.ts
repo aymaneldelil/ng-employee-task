@@ -51,9 +51,7 @@ export class DummydatabasesService {
   }
   //---------------------------------------------------------------------------------------------------------------------------------------------
   public getPositions(): Observable<Array<Iposition<string>>> {
-    
-    this.positions$.subscribe((s)=>console.log(s)
-    )
+   
     return this.positions$;
   }
   //---------------------------------------------------------------------------------------------------------------------------------------------
@@ -76,7 +74,7 @@ export class DummydatabasesService {
     let empList: Array<Iemployee> = JSON.parse(
       localStorage.getItem('dummyEmp')!
     );
-    from(empList).pipe(
+   return from(empList).pipe(
       filter((f) => {
         return f.id !== id;
       }),
