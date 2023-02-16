@@ -52,27 +52,7 @@ body {
   font-family: 'Quicksand', sans-serif;
 }
 
-.addEmployeeDialog {
 
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-
-  .group {
-    width: 50%;
-    min-width: 150px;
-    height: 150px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-
-    @include mq.breakpoints(medium) {
-      width: 80%;
-    }
-
-  }
-}
 
 .container {
   padding-left: 15px;

@@ -5,7 +5,7 @@ import {
   TemplateRef,
   ViewChild,
 } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Iemployee } from 'src/app/core/interfaces/iemployee';
@@ -25,6 +25,7 @@ import { map } from 'rxjs';
 export class DashboardComponent implements OnInit {
   constructor(
     private _dialog: MatDialog,
+    // private _matDialog :  MatDialogConfig,
     private _dbSVC: DummydatabasesService
   ) {}
 
@@ -32,7 +33,7 @@ export class DashboardComponent implements OnInit {
   employeeLenght!: number;
 
   ngOnInit(): void {
-    this.initialValues()
+    this.initialValues();
   }
 
   private initialValues() {
@@ -49,7 +50,7 @@ export class DashboardComponent implements OnInit {
         },
       });
 
-      this._dbSVC
+    this._dbSVC
       .getEmployee()
       .pipe(
         map((m) => {
@@ -72,7 +73,12 @@ export class DashboardComponent implements OnInit {
   }
   //-------------------------------------------------------------------------------------------------------------------------------------------
   openAddDialog() {
-    const dialogRef = this._dialog.open(EmployeeDialogComponent);
+    const dialogRef = this._dialog.open(EmployeeDialogComponent, {
+      minWidth: '400px',
+      maxWidth: '600px',
+      // height: '80vh',
+      // maxHeight: '90vh ',
+    });
     dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
     });

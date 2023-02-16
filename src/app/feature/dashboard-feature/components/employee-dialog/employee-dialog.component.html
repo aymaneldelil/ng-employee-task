@@ -1,7 +1,6 @@
 <div mat-dialog-content class="employee-dialog">
-    <div class="container">
-        <h3>Add New Employee</h3>
-        <form [formGroup]="employeeForm" class="addEmployeeDialog">
+        <h3 mat-dialog-title align="center">Add New Employee</h3>
+        <form [formGroup]="employeeForm" class="employeeForm">
 
             <mat-form-field appearance="outline">
                 <mat-label>Employee ID</mat-label>
@@ -84,8 +83,7 @@
             <!-- --------------------------------------------------------------------------------------------->
         </form>
     </div>
-</div>
-<div mat-dialog-actions class="action">
+<div mat-dialog-actions  align="center" class="action">
     <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel</button>
     <button mat-raised-button color="primary" type="submit" [mat-dialog-close]="false" (click)="updateEmp()">{{data ?
         'Update': 'Add Employee'}}</button>
