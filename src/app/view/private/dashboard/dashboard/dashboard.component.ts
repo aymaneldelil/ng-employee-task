@@ -7,4 +7,17 @@ import { Component } from '@angular/core';
 })
 export class DashboardComponent {
 
+
+
+
+  emTableColumns: string[] = [
+    'id',
+    'firstName',
+    'lastName',
+    'email',
+    'gender',
+    'department',
+    'position',
+    'action',
+  ];
 }

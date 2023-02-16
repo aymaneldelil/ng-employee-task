@@ -1,9 +1,8 @@
-export interface ISignUpForm {
+export interface Iemployee {
     id:string;
     fist_name: string;
     last_name: string;
     email: string;
-    password: string;
     department: string;
     gender: string;
     position: string;
