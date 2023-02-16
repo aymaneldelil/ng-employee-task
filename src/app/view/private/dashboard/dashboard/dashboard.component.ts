@@ -13,14 +13,56 @@ import { MatSort } from '@angular/material/sort';
 import { EmployeeService } from 'src/app/shared/services/employee.service';
 import { EmployeeDialogComponent } from 'src/app/feature/dashboard-feature/components/employee-dialog/employee-dialog.component';
 import { DashboardFilterComponent } from 'src/app/feature/dashboard-feature/components/dashboard-filter/dashboard-filter.component';
+import { Idepartment } from 'src/app/core/interfaces/idepartment';
+import { DummydatabasesService } from 'src/app/shared/services/dummydatabases.service';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.scss'],
 })
-export class DashboardComponent {
-  constructor(private _dialog: MatDialog) {}
+export class DashboardComponent implements OnInit {
+  constructor(
+    private _dialog: MatDialog,
+    private _dbSVC: DummydatabasesService
+  ) {}
+
+  departmentLenght!: number;
+  employeeLenght!: number;
+
+  ngOnInit(): void {
+    this.initialValues()
+  }
+
+  private initialValues() {
+    this._dbSVC
+      .getDepartment()
+      .pipe(
+        map((m) => {
+          return m.length;
+        })
+      )
+      .subscribe({
+        next: (n) => {
+          this.departmentLenght = n;
+        },
+      });
+
+      this._dbSVC
+      .getEmployee()
+      .pipe(
+        map((m) => {
+          return m.length;
+        })
+      )
+      .subscribe({
+        next: (n) => {
+          this.employeeLenght = n;
+        },
+      });
+  }
+  //-------------------------------------------------------------------------------------------------------------------------------------------
 
   openFilterDialog() {
     const dialogRef = this._dialog.open(DashboardFilterComponent);
@@ -28,13 +70,8 @@ export class DashboardComponent {
       console.log(`Dialog result: ${result}`);
     });
   }
-
   //-------------------------------------------------------------------------------------------------------------------------------------------
   openAddDialog() {
-    // const dialogConfig = new MatDialogConfig();
-    // dialogConfig.minWidth = '400px'
-
-    // dialogConfig.maxWidth = '600px'
     const dialogRef = this._dialog.open(EmployeeDialogComponent);
     dialogRef.afterClosed().subscribe((result) => {
       console.log(`Dialog result: ${result}`);
