@@ -3,7 +3,7 @@ import { Idepartment } from '../../core/interfaces/idepartment';
 
 import { Iemployee } from '../../core/interfaces/iemployee';
 import { Iposition } from '../../core/interfaces/iposition';
-import { from, Observable, of } from 'rxjs';
+import { filter, from, map, Observable, of, tap, toArray } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
@@ -31,16 +31,37 @@ export class DummydatabasesService {
       this.DummyPositions = JSON.parse(localStorage.getItem('DummyPositions')!);
     }
   }
-
-  getEmployee(): Observable<Array<Iemployee>> {
+  //---------------------------------------------------------------------------------------------------------------------------------------------
+  public getEmployee(): Observable<Array<Iemployee>> {
     return of(this.dummyEmp);
   }
   //---------------------------------------------------------------------------------------------------------------------------------------------
-  getDepartment(): Observable<Array<Idepartment>> {
+  public getDepartment(): Observable<Array<Idepartment>> {
     return of(this.dummyDepartments);
   }
   //---------------------------------------------------------------------------------------------------------------------------------------------
-  getPositions(): Observable<Array<Iposition<string>>> {
+  public getPositions(): Observable<Array<Iposition<string>>> {
     return of(this.DummyPositions);
+  }
+  //---------------------------------------------------------------------------------------------------------------------------------------------
+  public updateDB(type: string, newValue: any) {
+    let oldData: Array<any> = JSON.parse(localStorage.getItem(type)!);
+    oldData.push(newValue);
+    localStorage.setItem(type, JSON.stringify(oldData));
+  }
+  //---------------------------------------------------------------------------------------------------------------------------------------------
+  public removeEmploye(id: string) {
+    let empList: Array<Iemployee> = JSON.parse(
+      localStorage.getItem('dummyEmp')!
+    );
+    return from(empList).pipe(
+      filter((f) => {
+        return f.id !== id;
+      }),
+      toArray(),
+      tap((t)=>{
+        localStorage.setItem("dummyEmp" , JSON.stringify(t))
+      })
+    );
   }
 }
