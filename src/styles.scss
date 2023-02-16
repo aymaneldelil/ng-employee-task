@@ -2,6 +2,7 @@
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @use '@angular/material' as mat;
+@use './app/style/media-query' as mq;
 // Plus imports for other components in your app.
 
 // Include the common styles for Angular Material. We include this here so that you only
@@ -34,6 +35,35 @@ $employee-task-theme: mat.define-light-theme((
 @include mat.all-component-themes($employee-task-theme);
 
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap');
 
 html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.container {
+  padding-left: 15px;
+  padding-right: 15px;
+  margin: 0 auto;
+
+  @include mq.breakpoints(small) {
+    width: 750px;
+  }
+
+  @include mq.breakpoints(medium) {
+    width: 970px;
+  }
+
+  @include mq.breakpoints(large) {
+    width: 1170px;
+  }
+}
