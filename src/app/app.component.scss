@@ -1,0 +1,16 @@
+@use './style/index' as * ;
+
+//---------------------------------------------------------------------------------------------------------------------------------------------
+
+.app-root {
+
+    min-height: 100vh;
+    overflow-x: hidden;
+    @include display-flex;
+    @include flex-direction(column);
+
+    .router-outlet {
+        flex: 1 0 auto;
+        padding-top: 64px;
+    }
+}
