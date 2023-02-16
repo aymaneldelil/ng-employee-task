@@ -5,6 +5,7 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AngularMaterialModule } from 'src/app/feature/angular-material/angular-material.module';
 import { ComponentsModule } from 'src/app/shared/components/components.module';
+import { EmployeeService } from 'src/app/shared/services/employee.service';
 
 @NgModule({
   declarations: [DashboardComponent],
@@ -13,6 +14,8 @@ import { ComponentsModule } from 'src/app/shared/components/components.module';
     DashboardRoutingModule,
     AngularMaterialModule,
     ComponentsModule,
-  ],
+  ],providers:[
+    EmployeeService ,
+  ]
 })
 export class DashboardModule {}

@@ -1,18 +1,19 @@
 import { Injectable } from '@angular/core';
-import { Idepartment } from '../interfaces/idepartment';
+import { Idepartment } from '../../core/interfaces/idepartment';
 
-import { Iemployee } from '../interfaces/iemployee';
-import { Iposition } from '../interfaces/iposition';
+import { Iemployee } from '../../core/interfaces/iemployee';
+import { Iposition } from '../../core/interfaces/iposition';
+import { from, Observable, of } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
 //----------------------------------------------------------------------------------------------------------------------------------------------
-export class SDummydatabasesService {
+export class DummydatabasesService {
   private dummyEmp: Array<Iemployee> = [
     {
       id: '1001',
-      fist_name: 'Ayman',
-      last_name: 'Mostafa',
+      firstName: 'Ayman',
+      lastName: 'Mostafa',
       email: 'ayman@yahoo.com',
       department: '',
       gender: 'Male',
@@ -20,8 +21,8 @@ export class SDummydatabasesService {
     },
     {
       id: '1002',
-      fist_name: 'Ahmed',
-      last_name: 'Mostafa',
+      firstName: 'Ahmed',
+      lastName: 'Mostafa',
       email: 'ahmed@yahoo.com',
       department: '',
       gender: 'Male',
@@ -29,8 +30,8 @@ export class SDummydatabasesService {
     },
     {
       id: '1001',
-      fist_name: 'Mohamed',
-      last_name: 'Ahmed',
+      firstName: 'Mohamed',
+      lastName: 'Ahmed',
       email: 'ayman@yahoo.com',
       department: '',
       gender: 'Male',
@@ -38,8 +39,8 @@ export class SDummydatabasesService {
     },
     {
       id: '1001',
-      fist_name: 'Ayman',
-      last_name: 'Mostafa',
+      firstName: 'Ayman',
+      lastName: 'Mostafa',
       email: 'ayman@yahoo.com',
       department: '',
       gender: 'Male',
@@ -47,8 +48,8 @@ export class SDummydatabasesService {
     },
     {
       id: '1001',
-      fist_name: 'Ayman',
-      last_name: 'Mostafa',
+      firstName: 'Ayman',
+      lastName: 'Mostafa',
       email: 'ayman@yahoo.com',
       department: '',
       gender: 'Male',
@@ -132,4 +133,8 @@ export class SDummydatabasesService {
     },
   ];
   constructor() {}
+
+  getEmployee(): Observable<Array<Iemployee>> {
+    return of(this.dummyEmp);
+  }
 }
