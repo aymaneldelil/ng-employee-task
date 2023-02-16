@@ -1,0 +1,23 @@
+//-------------------------------------------------------------------------
+.dashboard-filter {
+    display: flex;
+    align-items: end;
+
+    .filter-dialog,
+    .add-dialog {
+        img {
+            width: 50px;
+        }
+
+    }
+
+}
+
+.addEmployee {
+    .container {
+        form {
+            background-color: red;
+            .group {}
+        }
+    }
+}

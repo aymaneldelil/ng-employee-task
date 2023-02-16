@@ -1,31 +1,17 @@
-
 @use '../../../../style/index' as *;
 
 //------------------------------------------------------------------------------------------------
 
-.dashboard{
-
-    .mat-drawer-container{
-
-        .mat-drawer{
-
-        }
-        // ------------
-        .mat-drawer-content{
-
-            .dashboard-content{
-
-
-                .container{
-
-
-                    .content-header{
-                        @include display-flex();
-                        @include justify-content(space-evenly);
-                    }
-                }
+.dashboard {
+    .dashboard-content {
+        .container {
+            .content-header {
+                @include display-flex();
+                @include justify-content(space-evenly);
             }
+        
         }
     }
+
 
 }
