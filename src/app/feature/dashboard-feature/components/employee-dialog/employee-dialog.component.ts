@@ -9,6 +9,7 @@ import { Idepartment } from 'src/app/core/interfaces/idepartment';
 import { Iemployee } from 'src/app/core/interfaces/iemployee';
 import { DummydatabasesService } from 'src/app/shared/services/dummydatabases.service';
 import { PositionService } from 'src/app/shared/services/position.service';
+import { DashboardService } from '../../services/dashboard.service';
 //-------------------------------------------------------------------------------------
 @Component({
   selector: 'app-employee-dialog',
@@ -25,9 +26,8 @@ export class EmployeeDialogComponent implements OnInit {
 
   constructor(
     private _fb: FormBuilder,
-    private _positionSVC: PositionService,
     private _dialogRef: MatDialogRef<EmployeeDialogComponent>,
-    private _DB: DummydatabasesService,
+    private _dashBoardSVC: DashboardService,
     @Inject(MAT_DIALOG_DATA) public data: Iemployee
   ) {}
 
@@ -69,7 +69,7 @@ export class EmployeeDialogComponent implements OnInit {
   //--------------------------------------------------------------------------------------------------
   // GET LIST OF DEPATMENT
   private initialValues() {
-    this._DB.getDepartment().subscribe({
+    this._dashBoardSVC.getDepartmentList$().subscribe({
       next: (n) => {
         this.departments = n;
       },
@@ -91,7 +91,7 @@ export class EmployeeDialogComponent implements OnInit {
   // GET LIST OF POSITIONS , DEPENDS ON  SELECTED DEPARTMENT
   //-------------------------------------------------------------------------------------------------------------------------------------------
   public onSelectedDep(selectedDepID: string) {
-    this._positionSVC.getPositionsOfDepartment(selectedDepID).subscribe({
+    this._dashBoardSVC.getPositionsOfDepartment(selectedDepID).subscribe({
       next: (data) => {
         this.positions = data.positions;
       },
@@ -99,11 +99,11 @@ export class EmployeeDialogComponent implements OnInit {
   }
   //-------------------------------------------------------------------------------------------------------------------------------------------
   public onUpdateEmp() {
-    this._DB.updateDB(this.employeeForm.value).subscribe();
+    this._dashBoardSVC.updateDB(this.employeeForm.value).subscribe();
     this._dialogRef.close(true);
   }
   //-------------------------------------------------------------------------------------------------------------------------------------------
   public onAddEmp() {
-    this._DB.addEmployeeDB('dummyEmp', this.employeeForm.value);
+    this._dashBoardSVC.addEmployeeDB('dummyEmp', this.employeeForm.value);
   }
 }

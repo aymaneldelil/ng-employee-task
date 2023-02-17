@@ -4,10 +4,9 @@ import { DashboardTableComponent } from './components/dashboard-table/dashboard-
 import { AngularMaterialModule } from '../angular-material/angular-material.module';
 import { DashboardFilterComponent } from './components/dashboard-filter/dashboard-filter.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { DepartmentService } from 'src/app/shared/services/department.service';
-import { PositionService } from 'src/app/shared/services/position.service';
 import { EmployeeDialogComponent } from './components/employee-dialog/employee-dialog.component';
 import { DummydatabasesService } from 'src/app/shared/services/dummydatabases.service';
+import { DashboardService } from './services/dashboard.service';
 @NgModule({
   declarations: [
     DashboardTableComponent,
@@ -26,9 +25,8 @@ import { DummydatabasesService } from 'src/app/shared/services/dummydatabases.se
     EmployeeDialogComponent,
   ],
   providers: [
-    DepartmentService,
-    PositionService,
     DummydatabasesService,
+    DashboardService
   ],
 })
 export class DashboardFeatureModule {}

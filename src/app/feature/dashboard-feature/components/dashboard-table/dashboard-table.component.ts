@@ -14,6 +14,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Observable, observable } from 'rxjs';
 import { Iemployee } from 'src/app/core/interfaces/iemployee';
 import { DummydatabasesService } from 'src/app/shared/services/dummydatabases.service';
+import { DashboardService } from '../../services/dashboard.service';
 import { DashboardFilterComponent } from '../dashboard-filter/dashboard-filter.component';
 import { EmployeeDialogComponent } from '../employee-dialog/employee-dialog.component';
 
@@ -47,7 +48,7 @@ export class DashboardTableComponent implements OnInit {
   }
   //-------------------------------------------------------------------------------------------------------------------------------------------
   private getEmployeeList() {
-    return this._dbSVC.getEmployee().subscribe({
+    return this._dashBoardSVC.getEmployeeList$().subscribe({
       next: (res) => {
         console.log(' Need to updata The Table');
         this.dataSource = new MatTableDataSource(res);
@@ -60,7 +61,8 @@ export class DashboardTableComponent implements OnInit {
 
   constructor(
     private _dialog: MatDialog,
-    private _dbSVC: DummydatabasesService,
+    // private _dbSVC: DummydatabasesService,
+    private _dashBoardSVC:DashboardService,
     private _snackBar: MatSnackBar
   ) {}
   //-------------------------------------------------------------------------------------------------------------------------------------------
@@ -70,19 +72,10 @@ export class DashboardTableComponent implements OnInit {
   //-------------------------------------------------------------------------------------------------------------------------------------------------
   deleteEmployee(id: string) {
     console.log(id);
-    this._dbSVC.removeEmploye(id).subscribe();
+    this._dashBoardSVC.removeEmploye(id).subscribe();
   }
   //-------------------------------------------------------------------------------------------------------------------------------------------------
-  testOBS() {
-    this._dbSVC.getEmployee().subscribe({
-      next: (n) => {
-        console.log(n);
-      },
-      error: (e) => {
-        console.log(e);
-      },
-    });
-  }
+
   //-------------------------------------------------------------------------------------------------------------------------------------------------
 
 
