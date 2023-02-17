@@ -9,6 +9,7 @@
             <input matInput formControlName="id">
             <mat-error *ngIf="employeeForm.get(['id'])?.hasError('required')">This field is
                 required</mat-error>
+            <mat-error *ngIf="employeeForm.get(['id'])?.hasError('pattern')">ID must be Integer Values</mat-error>
         </mat-form-field>
         <div class="group">
             <!-- --------------------------------------------------------------------------------------------->

@@ -37,7 +37,7 @@ export class EmployeeDialogComponent implements OnInit {
   }
   private initialForm() {
     this.employeeForm = this._fb.group({
-      id: [''],
+      id: ['', [ Validators.required,Validators.pattern(/^[1-9][0-9]*$/)]],
       firstName: [
         null,
         [
