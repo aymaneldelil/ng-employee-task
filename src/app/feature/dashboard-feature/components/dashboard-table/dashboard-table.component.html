@@ -35,7 +35,7 @@
             <!-- Gender Column -->
             <ng-container matColumnDef="gender">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Gender </th>
-                <td mat-cell *matCellDef="let emp"> {{emp.gender}} </td>
+                <td mat-cell *matCellDef="let emp">  <mat-icon>{{emp.gender.toLowerCase()}}</mat-icon></td>
             </ng-container>
             <!-- email Column -->
             <ng-container matColumnDef="email">

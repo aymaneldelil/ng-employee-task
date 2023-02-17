@@ -100,11 +100,12 @@ export class EmployeeDialogComponent implements OnInit {
   }
   //-------------------------------------------------------------------------------------------------------------------------------------------
   public onUpdateEmp() {
-    this._DB.updateDB('dummyEmp', this.employeeForm.value);
+    this._DB.updateDB(this.employeeForm.value).subscribe();
+
     this._dialogRef.close(true);
   }
   //-------------------------------------------------------------------------------------------------------------------------------------------
   public onAddEmp() {
-    this._DB.addEmployeeDB('dummyEmp', this.employeeForm.value)
+    this._DB.addEmployeeDB('dummyEmp', this.employeeForm.value);
   }
 }

@@ -1,5 +1,5 @@
 <div mat-dialog-content class="employee-dialog">
-        <h3 mat-dialog-title align="center">Add New Employee</h3>
+        <h3 mat-dialog-title align="center">{{ data ? "Update Employee Data" : "Add Employee"}}</h3>
         <form [formGroup]="employeeForm" class="employeeForm">
 
             <mat-form-field appearance="outline">

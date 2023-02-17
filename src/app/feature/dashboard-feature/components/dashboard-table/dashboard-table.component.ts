@@ -48,8 +48,6 @@ export class DashboardTableComponent implements OnInit {
     return this._dbSVC.getEmployee().subscribe({
       next: (res) => {
         console.log(' Need to updata The Table');
-        console.log(res);
-
         this.dataSource = new MatTableDataSource(res);
         // this.dataSource.sort = this.sort;
         // this.dataSource.paginator = this.paginator;

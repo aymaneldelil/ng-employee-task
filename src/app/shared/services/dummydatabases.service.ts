@@ -6,11 +6,14 @@ import { Iposition } from '../../core/interfaces/iposition';
 import {
   BehaviorSubject,
   filter,
+  flatMap,
   from,
   map,
+  mergeMap,
   Observable,
   of,
   Subject,
+  take,
   tap,
   toArray,
 } from 'rxjs';
@@ -51,7 +54,6 @@ export class DummydatabasesService {
   }
   //---------------------------------------------------------------------------------------------------------------------------------------------
   public getPositions(): Observable<Array<Iposition<string>>> {
-   
     return this.positions$;
   }
   //---------------------------------------------------------------------------------------------------------------------------------------------
@@ -63,26 +65,35 @@ export class DummydatabasesService {
   }
   //---------------------------------------------------------------------------------------------------------------------------------------------
 
-  public updateDB(type: string, newValue: any) {
-    let oldData: Array<any> = JSON.parse(localStorage.getItem(type)!);
-    oldData.push(newValue);
-    localStorage.setItem(type, JSON.stringify(oldData));
-    this.employees$.next(oldData);
+  public updateDB(data: Iemployee) {
+    let empList: Array<Iemployee> = JSON.parse(
+      localStorage.getItem('dummyEmp')!
+    );
+    return of(empList).pipe(
+      mergeMap((m) => m),
+      filter((f) => f.id == data.id),
+      tap((t) => {
+        empList[3] = data;
+        localStorage.setItem('dummyEmp', JSON.stringify(empList));
+        this.employees$.next(empList);
+      }),
+      take(1)
+    );
   }
   //---------------------------------------------------------------------------------------------------------------------------------------------
   public removeEmploye(id: string) {
     let empList: Array<Iemployee> = JSON.parse(
       localStorage.getItem('dummyEmp')!
     );
-   return from(empList).pipe(
+    return from(empList).pipe(
       filter((f) => {
         return f.id !== id;
       }),
       toArray(),
       tap((t) => {
         localStorage.setItem('dummyEmp', JSON.stringify(t));
-         this.employees$.next(t);
-         return  this.employees$
+        this.employees$.next(t);
+        return this.employees$;
       })
     );
   }
