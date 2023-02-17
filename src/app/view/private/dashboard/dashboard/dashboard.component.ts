@@ -9,6 +9,7 @@ import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 
 import { DummydatabasesService } from 'src/app/shared/services/dummydatabases.service';
 import { map } from 'rxjs';
+import { DashboardService } from 'src/app/feature/dashboard-feature/services/dashboard.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -18,8 +19,7 @@ import { map } from 'rxjs';
 export class DashboardComponent implements OnInit {
   constructor(
     private _dialog: MatDialog,
-    // private _matDialog :  MatDialogConfig,
-    private _dbSVC: DummydatabasesService
+    private _dashboardSVC: DashboardService // private _matDialog :  MatDialogConfig,
   ) {}
 
   departmentLenght!: number;
@@ -30,8 +30,8 @@ export class DashboardComponent implements OnInit {
   }
 
   private initialValues() {
-    this._dbSVC
-      .getDepartment()
+    this._dashboardSVC
+      .getDepartmentList$()
       .pipe(
         map((m) => {
           return m.length;
@@ -43,8 +43,8 @@ export class DashboardComponent implements OnInit {
         },
       });
 
-    this._dbSVC
-      .getEmployee()
+    this._dashboardSVC
+      .getEmployeeList$()
       .pipe(
         map((m) => {
           return m.length;
@@ -57,6 +57,4 @@ export class DashboardComponent implements OnInit {
       });
   }
   //-------------------------------------------------------------------------------------------------------------------------------------------
-
- 
 }
