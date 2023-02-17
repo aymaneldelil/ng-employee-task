@@ -5,9 +5,8 @@ import {
 
 } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Idepartment } from 'src/app/core/interfaces/idepartment';
-import { DummydatabasesService } from 'src/app/shared/services/dummydatabases.service';
-import { PositionService } from 'src/app/shared/services/position.service';
+
+import { DashboardService } from '../../services/dashboard.service';
 
 //--------------------------------------------------------------------------------------------------------------------
 
@@ -24,8 +23,7 @@ export class DashboardFilterComponent implements OnInit {
   //----------------------------------------------------------
   constructor(
     private _fb: FormBuilder,
-    private _db: DummydatabasesService,
-    private _positionSVC: PositionService,
+    private _dashboardSVC:DashboardService,
     private _dialogRef: MatDialogRef<DashboardFilterComponent>,
     @Inject(MAT_DIALOG_DATA) public data: string
   ) {}
@@ -43,13 +41,7 @@ export class DashboardFilterComponent implements OnInit {
     this._dialogRef.close({data : handelEvent});
   }
 
-  // private initialValues() {
-  //   this._DB.getDepartment().subscribe({
-  //     next: (n) => {
-  //       this.departments = n;
-  //     },
-  //   });
-  // }
+
   //-------------------------------------------------------------------------------------------------------------------------------------------
 
   // public onSelectedDep(selectedDepID: string) {
