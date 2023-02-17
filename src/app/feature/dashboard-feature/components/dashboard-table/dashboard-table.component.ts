@@ -14,6 +14,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { Observable, observable } from 'rxjs';
 import { Iemployee } from 'src/app/core/interfaces/iemployee';
 import { DummydatabasesService } from 'src/app/shared/services/dummydatabases.service';
+import { DashboardFilterComponent } from '../dashboard-filter/dashboard-filter.component';
 import { EmployeeDialogComponent } from '../employee-dialog/employee-dialog.component';
 
 @Component({
@@ -66,7 +67,6 @@ export class DashboardTableComponent implements OnInit {
 
   // dataSource = new MatTableDataSource<MyDataType>();
 
-
   //-------------------------------------------------------------------------------------------------------------------------------------------------
   deleteEmployee(id: string) {
     console.log(id);
@@ -95,7 +95,6 @@ export class DashboardTableComponent implements OnInit {
 
   //-------------------------------------------------------------------------------------------------------------------------------------------------
 
-
   openEditForm(data: Iemployee) {
     const dialogRef = this._dialog.open(EmployeeDialogComponent, {
       data,
@@ -104,6 +103,26 @@ export class DashboardTableComponent implements OnInit {
       next: (n) => {
         // this.updateTable(n);
       },
+    });
+  }
+  //-------------------------------------------------------------------------------------------------------------------------------------------------
+
+  openFilterDialog() {
+    const dialogRef = this._dialog.open(DashboardFilterComponent);
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
+    });
+  }
+  //-------------------------------------------------------------------------------------------------------------------------------------------
+  openAddDialog() {
+    const dialogRef = this._dialog.open(EmployeeDialogComponent, {
+      minWidth: '400px',
+      maxWidth: '600px',
+      // height: '80vh',
+      // maxHeight: '90vh ',
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(`Dialog result: ${result}`);
     });
   }
 }

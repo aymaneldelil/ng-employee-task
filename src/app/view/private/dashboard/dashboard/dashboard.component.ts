@@ -60,22 +60,5 @@ export class DashboardComponent implements OnInit {
   }
   //-------------------------------------------------------------------------------------------------------------------------------------------
 
-  openFilterDialog() {
-    const dialogRef = this._dialog.open(DashboardFilterComponent);
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
-    });
-  }
-  //-------------------------------------------------------------------------------------------------------------------------------------------
-  openAddDialog() {
-    const dialogRef = this._dialog.open(EmployeeDialogComponent, {
-      minWidth: '400px',
-      maxWidth: '600px',
-      // height: '80vh',
-      // maxHeight: '90vh ',
-    });
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
-    });
-  }
+ 
 }

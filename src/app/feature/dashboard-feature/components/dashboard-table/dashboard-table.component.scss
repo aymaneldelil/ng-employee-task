@@ -2,6 +2,10 @@
 @use '../../../../style/index' as * ;
 //----------------------------------------------------
 .table-container{
+    .dialog {
+        @include display-flex();
+
+    }
     .filter-dialog{
         img{
             width: 50px;
