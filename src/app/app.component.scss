@@ -6,6 +6,7 @@
 
     min-height: 100vh;
     overflow-x: hidden;
+    padding-top: 100px;
     @include display-flex;
     @include flex-direction(column);
 

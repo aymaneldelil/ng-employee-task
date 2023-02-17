@@ -1,14 +1,13 @@
-
 <div class="table-container">
     <div class="dialog">
         <div class="filter-dialog">
             <img (click)="openFilterDialog()" src="./assets/svg/svg-filter.svg" width="70px" alt="" srcset="">
         </div>
         <div class="add-dialog">
-            <img (click)="openAddDialog()" src="./assets/svg/svg-add-employee.svg"   width="70px" alt="" srcset="">
+            <img (click)="openAddDialog()" src="./assets/svg/svg-add-employee.svg" width="70px" alt="" srcset="">
         </div>
     </div>
-<!-- //------------------------------------------------------------------------------------------------------------- -->
+    <!-- //------------------------------------------------------------------------------------------------------------- -->
 
     <div class="tableSection mat-elevation-z8">
         <table mat-table [dataSource]="dataSource" matSort>
@@ -34,7 +33,7 @@
             <!-- Gender Column -->
             <ng-container matColumnDef="gender">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header> Gender </th>
-                <td mat-cell *matCellDef="let emp">  <mat-icon>{{emp.gender.toLowerCase()}}</mat-icon></td>
+                <td mat-cell *matCellDef="let emp"> <mat-icon>{{emp.gender.toLowerCase()}}</mat-icon></td>
             </ng-container>
             <!-- email Column -->
             <ng-container matColumnDef="email">
@@ -81,8 +80,8 @@
                 <td class="mat-cell" colspan="4">No data matching the filter</td>
             </tr>
         </table>
-
         <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+
     </div>
 
 </div>

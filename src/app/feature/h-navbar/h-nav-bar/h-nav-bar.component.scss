@@ -1,25 +1,32 @@
 @use '../../../style/index' as *;
 
 //---------------------------------------------------------------------------------------------------------------------------------------------
-nav {
+
+header {
+    flex: 0 0 80px;
+    position: fixed;
+    z-index: 11;
+    top: 0;
+    width: 100%;
+    transition: all ease-in-out 0.3s;
     background-color: white;
-
     .container {
+        .h-navbar {
+            @include display-flex();
+            @include justify-content(space-between);
+            .nav-img{
 
-        @include display-flex();
-
-        @include justify-content(space-between);
-
-        .nav-img {
-
-            .logo {
-                width: 150px
+                .logo {
+                        width: calc($size * 15);
+                  
+                }
             }
-
-        }
-
-        .nav-data {
-            
         }
     }
+}
+
+.changeOnScroll {
+    position: fixed;
+    top: -70px;
+    width: 100%;
 }
