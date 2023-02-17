@@ -1,14 +1,34 @@
+@use '../../../../style/index' as *;
 
-@use '../../../../style/index' as * ;
 //----------------------------------------------------
-.table-container{
-    .dialog {
-        @include display-flex();
+.table-container {
+    overflow: hidden;
+
+    .tableSection {
+        overflow-x: auto;
+        table {
+            .mdc-data-table__content{
+                .mat-mdc-row{
+                    
+                }
+            }
+        }
 
     }
-    .filter-dialog{
-        img{
+
+    .dialog {
+        @include display-flex();
+        @include flex-wrap(wrap);
+
+    }
+
+    .filter-dialog {
+        img {
             width: 50px;
         }
     }
+}
+
+.mat-table {
+    overflow-x: scroll;
 }

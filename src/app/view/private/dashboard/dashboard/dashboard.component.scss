@@ -10,6 +10,7 @@
 
             .content-header {
                 @include display-flex();
+                @include flex-wrap(wrap);
                 @include justify-content(space-evenly);
             }
 

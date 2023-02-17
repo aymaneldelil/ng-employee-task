@@ -17,16 +17,21 @@
         height: 100px;
         border-radius: 50%;
     }
+
     .card-body {
 
         .card-title {
-            span{
+            span {
                 color: $primary-dark;
-                font-weight: 600;
+                font-weight: 800;
                 font-size: calc($size *2);
-            }  
+            }
         }
 
-        .card-count {}
+        .card-count {
+            font-weight: 600;
+            font-size: calc($size *3);
+            color: $secondary-dark;
+        }
     }
 }
