@@ -1,90 +1,103 @@
 <div mat-dialog-content class="employee-dialog">
-        <h3 mat-dialog-title align="center">{{ data ? "Update Employee Data" : "Add Employee"}}</h3>
-        <form [formGroup]="employeeForm" class="employeeForm">
+    <h3 mat-dialog-title align="center">{{ data ? "Update Employee Data" : "Add Employee"}}</h3>
+    <form [formGroup]="employeeForm" class="employeeForm">
 
+        <!-- Employee ID  -->
+
+        <mat-form-field appearance="outline">
+            <mat-label>Employee ID</mat-label>
+            <input matInput formControlName="id">
+            <mat-error *ngIf="employeeForm.get(['id'])?.hasError('required')">This field is
+                required</mat-error>
+        </mat-form-field>
+        <div class="group">
+            <!-- --------------------------------------------------------------------------------------------->
+
+            <!-- Employee First Name   -->
             <mat-form-field appearance="outline">
-                <mat-label>Employee ID</mat-label>
-                <input matInput formControlName="id">
-                <mat-error *ngIf="employeeForm.get(['id'])?.hasError('required')">This field is
+                <mat-label>First Name</mat-label>
+                <input matInput formControlName="firstName">
+                <mat-error *ngIf="employeeForm.get(['firstName'])?.hasError('required')">This field is
                     required</mat-error>
+                <mat-error *ngIf="employeeForm.get(['firstName'])?.hasError('pattern')">The first name shoud be
+                    in
+                    alphabetic character</mat-error>
+                <mat-error *ngIf="employeeForm.get(['firstName'])?.hasError('minlength')">Are you kidding ,
+                    there
+                    is no
+                    name less than 3 characters </mat-error>
             </mat-form-field>
-            <div class="group">
-
-                <mat-form-field appearance="outline">
-                    <mat-label>First Name</mat-label>
-                    <input matInput formControlName="firstName">
-                    <mat-error *ngIf="employeeForm.get(['firstName'])?.hasError('required')">This field is
-                        required</mat-error>
-                    <mat-error *ngIf="employeeForm.get(['firstName'])?.hasError('pattern')">The first name shoud be
-                        in
-                        alphabetic character</mat-error>
-                    <mat-error *ngIf="employeeForm.get(['firstName'])?.hasError('minlength')">Are you kidding ,
-                        there
-                        is no
-                        name less than 3 characters </mat-error>
-                </mat-form-field>
-                <!-- --------------------------------------------------------------------------------------------->
-                <mat-form-field appearance="outline">
-                    <mat-label>Last Name</mat-label>
-                    <input matInput formControlName="lastName">
-                    <mat-error *ngIf="employeeForm.get(['lastName'])?.hasError('required')">This field is
-                        required</mat-error>
-                    <mat-error *ngIf="employeeForm.get(['lastName'])?.hasError('pattern')">The last name shoud be
-                        in
-                        alphabetic character</mat-error>
-                    <mat-error *ngIf="employeeForm.get(['lastName'])?.hasError('minlength')">Are you kidding ,
-                        there is
-                        no
-                        name less than 3 characters </mat-error>
-                </mat-form-field>
-            </div>
             <!-- --------------------------------------------------------------------------------------------->
-            <div class="group">
-                <mat-button-toggle-group formControlName="gender" aria-label="Font Style">
-                    <mat-button-toggle value="Male">
-                        <mat-icon>male</mat-icon>Male</mat-button-toggle>
-                    <mat-button-toggle value="Female">
-                        <mat-icon>female</mat-icon>
-                        Female</mat-button-toggle>
-                </mat-button-toggle-group>
 
-                <mat-form-field appearance="outline">
-                    <mat-label>Email Address</mat-label>
-                    <input matInput formControlName="email">
-                    <mat-error *ngIf="employeeForm.get(['email'])?.hasError('required')">This field is
-                        required</mat-error>
-                    <mat-error *ngIf="employeeForm.get(['email'])?.hasError('pattern')">Please enter valid email
-                        Address</mat-error>
-                </mat-form-field>
-            </div>
+            <!-- Employee Last Name   -->
+            <mat-form-field appearance="outline">
+                <mat-label>Last Name</mat-label>
+                <input matInput formControlName="lastName">
+                <mat-error *ngIf="employeeForm.get(['lastName'])?.hasError('required')">This field is
+                    required</mat-error>
+                <mat-error *ngIf="employeeForm.get(['lastName'])?.hasError('pattern')">The last name shoud be
+                    in
+                    alphabetic character</mat-error>
+                <mat-error *ngIf="employeeForm.get(['lastName'])?.hasError('minlength')">Are you kidding ,
+                    there is
+                    no
+                    name less than 3 characters </mat-error>
+            </mat-form-field>
+        </div>
+        <!-- --------------------------------------------------------------------------------------------->
+        <div class="group">
+
+            <!-- Employee Gender   -->
+            <mat-button-toggle-group formControlName="gender" aria-label="Font Style">
+                <mat-button-toggle value="Male">
+                    <mat-icon>male</mat-icon>Male</mat-button-toggle>
+                <mat-button-toggle value="Female">
+                    <mat-icon>female</mat-icon>
+                    Female</mat-button-toggle>
+            </mat-button-toggle-group>
+
+            <!-- Employee Email Addres  -->
+            <mat-form-field appearance="outline">
+                <mat-label>Email Address</mat-label>
+                <input matInput formControlName="email">
+                <mat-error *ngIf="employeeForm.get(['email'])?.hasError('required')">This field is
+                    required</mat-error>
+                <mat-error *ngIf="employeeForm.get(['email'])?.hasError('pattern')">Please enter valid email
+                    Address</mat-error>
+            </mat-form-field>
+        </div>
+        <!-- --------------------------------------------------------------------------------------------->
+        <div class="group">
+
+            <!-- Employee Department  -->
+            <mat-form-field appearance="outline">
+                <mat-label>Department</mat-label>
+                <mat-select [(ngModel)]="selectedDepartmentId" [value]="employeeForm.get(['department'])"
+                    (ngModelChange)="onSelectedDep($event)" formControlName="department">
+                    <mat-option *ngFor="let d of departments" [value]="d.id">
+                        {{d.name}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+
             <!-- --------------------------------------------------------------------------------------------->
-            <div class="group">
-
-                <mat-form-field appearance="outline">
-                    <mat-label>Department</mat-label>
-                    <mat-select [(ngModel)]="selectedDepartmentId" [value]="employeeForm.get(['department'])"
-                        (ngModelChange)="onSelectedDep($event)" formControlName="department">
-                        <mat-option *ngFor="let d of departments" [value]="d.id">
-                            {{d.name}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-
-                <!-- --------------------------------------------------------------------------------------------->
-                <mat-form-field appearance="outline">
-                    <mat-label>Position</mat-label>
-                    <mat-select formControlName="position">
-                        <mat-option *ngFor="let p of positions" [value]="p">
-                            {{p}}
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </div>
-            <!-- --------------------------------------------------------------------------------------------->
-        </form>
-    </div>
-<div mat-dialog-actions  align="center" class="action">
+            
+            <!-- Employee Position  -->
+            <mat-form-field appearance="outline">
+                <mat-label>Position</mat-label>
+                <mat-select formControlName="position">
+                    <mat-option *ngFor="let p of positions" [value]="p">
+                        {{p}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <!-- --------------------------------------------------------------------------------------------->
+    </form>
+</div>
+<div mat-dialog-actions align="center" class="action">
     <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel</button>
-    <button mat-raised-button color="primary" type="submit" [mat-dialog-close]="false" (click)="data ? onUpdateEmp() : onAddEmp()">{{data ?
+    <button mat-raised-button color="primary" type="submit" [mat-dialog-close]="false"
+        (click)="data ? onUpdateEmp() : onAddEmp()">{{data ?
         'Update': 'Add Employee'}}</button>
 </div>
