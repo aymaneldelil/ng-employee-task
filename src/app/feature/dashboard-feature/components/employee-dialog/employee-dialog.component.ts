@@ -79,7 +79,7 @@ export class EmployeeDialogComponent implements OnInit {
     if (!!this.data) {
       this.employeeForm.patchValue({
         id: this.data.id,
-        firstNname: this.data.firstName,
+        firstName: this.data.firstName,
         lastName: this.data.lastName,
         email: this.data.email,
         gender: this.data.gender,

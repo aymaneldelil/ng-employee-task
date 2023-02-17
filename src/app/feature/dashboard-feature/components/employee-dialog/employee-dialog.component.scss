@@ -1,12 +1,9 @@
-@use '../../../../style/' as *;
+@use '../../../../style/index' as *;
 
 //--------------------------------------------------------------
 .employee-dialog {
 
-
-
-
-    display: flex;
+    @include display-flex();
     flex-direction: column;
 
     .employeeForm {
@@ -18,15 +15,17 @@
 
         .group {
             width: 100%;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            margin: 10px 0;
+            margin: $size 0;
+            @include display-flex();
+            @include flex-wrap(wrap);
+            @include justify-content(space-between);
+
+            @include customBreakPoints(600px) {
+                @include flex-direction(column);
+                @include justify-content(space-between);
+            }
         }
 
-        // .mat-mdc-form-field {
-        //     width: 30%;
-        // }
     }
 
 }

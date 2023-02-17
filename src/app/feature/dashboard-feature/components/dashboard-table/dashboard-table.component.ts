@@ -107,7 +107,6 @@ export class DashboardTableComponent implements OnInit, AfterViewInit {
   //-------------------------------------------------------------------------------------------------------------------------------------------
   openAddDialog() {
     const dialogRef = this._dialog.open(EmployeeDialogComponent, {
-      minWidth: '400px',
       maxWidth: '600px',
       // height: '80vh',
       // maxHeight: '90vh ',
