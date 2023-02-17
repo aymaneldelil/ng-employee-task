@@ -33,12 +33,13 @@ export class DashboardTableComponent implements OnInit {
     'update',
     'remove',
   ];
-  // public dataSource!: MatTableDataSource<Iemployee>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
+  // @Input()
+  // dataSource!: CdkTableDataSourceInput<Iemployee>;
   @Input()
-  dataSource!: CdkTableDataSourceInput<Iemployee>;
+  dataSource!: MatTableDataSource<Iemployee>;
 
   ngOnInit(): void {
     this.getEmployeeList();
@@ -49,8 +50,8 @@ export class DashboardTableComponent implements OnInit {
       next: (res) => {
         console.log(' Need to updata The Table');
         this.dataSource = new MatTableDataSource(res);
-        // this.dataSource.sort = this.sort;
-        // this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+        this.dataSource.paginator = this.paginator;
       },
       error: console.log,
     });
@@ -65,17 +66,11 @@ export class DashboardTableComponent implements OnInit {
 
   // dataSource = new MatTableDataSource<MyDataType>();
 
-  applyFilter(event: Event) {
-    // const filterValue = (event.target as HTMLInputElement).value;
-    // this.dataSource.filter = filterValue.trim().toLowerCase();
-    // if (this.dataSource.paginator) {
-    //   this.dataSource.paginator.firstPage();
-    // }
-  }
+
   //-------------------------------------------------------------------------------------------------------------------------------------------------
   deleteEmployee(id: string) {
     console.log(id);
-    this._dbSVC.removeEmploye(id).subscribe()
+    this._dbSVC.removeEmploye(id).subscribe();
   }
   //-------------------------------------------------------------------------------------------------------------------------------------------------
   testOBS() {
@@ -89,6 +84,17 @@ export class DashboardTableComponent implements OnInit {
     });
   }
   //-------------------------------------------------------------------------------------------------------------------------------------------------
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
+  //-------------------------------------------------------------------------------------------------------------------------------------------------
+
 
   openEditForm(data: Iemployee) {
     const dialogRef = this._dialog.open(EmployeeDialogComponent, {
