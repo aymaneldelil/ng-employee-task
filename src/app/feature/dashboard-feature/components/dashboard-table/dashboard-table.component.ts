@@ -85,12 +85,18 @@ export class DashboardTableComponent implements OnInit {
   }
   //-------------------------------------------------------------------------------------------------------------------------------------------------
 
-  applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
+
+  openFilterDialog() {
+    const dialogRef = this._dialog.open(DashboardFilterComponent);
+    dialogRef.afterClosed().subscribe({
+      next: (result) => {
+        console.log('in table' , result.data);
+        this.dataSource.filter = result.data;
+        if (this.dataSource.paginator) {
+          this.dataSource.paginator.firstPage();
+        }
+      },
+    });
   }
 
   //-------------------------------------------------------------------------------------------------------------------------------------------------
@@ -107,12 +113,6 @@ export class DashboardTableComponent implements OnInit {
   }
   //-------------------------------------------------------------------------------------------------------------------------------------------------
 
-  openFilterDialog() {
-    const dialogRef = this._dialog.open(DashboardFilterComponent);
-    dialogRef.afterClosed().subscribe((result) => {
-      console.log(`Dialog result: ${result}`);
-    });
-  }
   //-------------------------------------------------------------------------------------------------------------------------------------------
   openAddDialog() {
     const dialogRef = this._dialog.open(EmployeeDialogComponent, {

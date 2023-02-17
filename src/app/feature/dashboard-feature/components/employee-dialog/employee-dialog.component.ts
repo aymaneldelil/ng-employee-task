@@ -27,7 +27,6 @@ export class EmployeeDialogComponent implements OnInit {
     private _fb: FormBuilder,
     private _positionSVC: PositionService,
     private _dialogRef: MatDialogRef<EmployeeDialogComponent>,
-
     private _DB: DummydatabasesService,
     @Inject(MAT_DIALOG_DATA) public data: Iemployee
   ) {}
@@ -101,7 +100,6 @@ export class EmployeeDialogComponent implements OnInit {
   //-------------------------------------------------------------------------------------------------------------------------------------------
   public onUpdateEmp() {
     this._DB.updateDB(this.employeeForm.value).subscribe();
-
     this._dialogRef.close(true);
   }
   //-------------------------------------------------------------------------------------------------------------------------------------------

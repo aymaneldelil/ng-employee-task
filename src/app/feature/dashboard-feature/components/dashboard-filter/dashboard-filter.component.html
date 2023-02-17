@@ -1,24 +1,11 @@
-<section class="dashboard-filter">
-
-  
-    <!-- //-------------------------------------------------------------------------------------------- -->
-
-    <ng-template #filterForm>
-        <div>
-        </div>
-        <mat-dialog-actions align="end">
-            <button mat-button matDialogClose="no">No</button>
-            <button mat-button matDialogClose="yes">Yes</button>
-        </mat-dialog-actions>
-    </ng-template>
-
-
-    <ng-template #addEmployee >
-       
-        <mat-dialog-actions align="end">
-            <button mat-button matDialogClose="no">No</button>
-            <button mat-button matDialogClose="yes">Add Employe</button>
-        </mat-dialog-actions>
-    </ng-template>
-
-</section>
+<div mat-dialog-content class="employee-dialog">
+    <h3 mat-dialog-title align="center">Filter</h3>
+    <mat-form-field >
+        <mat-label>Filter</mat-label>
+        <input matInput  placeholder="Ex. Mia"  [(ngModel)]='searchValue' name='searchBar' [value]='searchValue'>
+    </mat-form-field>
+</div>
+<div mat-dialog-actions align="center" class="action">
+    <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel</button>
+    <button mat-raised-button color="primary" type="submit" [mat-dialog-close]="false" (click)=" onFilter(searchValue)">Filter</button>
+</div>

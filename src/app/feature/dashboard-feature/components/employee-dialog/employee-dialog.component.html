@@ -81,7 +81,7 @@
             </mat-form-field>
 
             <!-- --------------------------------------------------------------------------------------------->
-            
+
             <!-- Employee Position  -->
             <mat-form-field appearance="outline">
                 <mat-label>Position</mat-label>
@@ -97,7 +97,7 @@
 </div>
 <div mat-dialog-actions align="center" class="action">
     <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel</button>
-    <button mat-raised-button color="primary" type="submit" [mat-dialog-close]="false"
+    <button mat-raised-button color="primary" type="submit" [mat-dialog-close]="false" [disabled]="!employeeForm.valid"
         (click)="data ? onUpdateEmp() : onAddEmp()">{{data ?
         'Update': 'Add Employee'}}</button>
 </div>
