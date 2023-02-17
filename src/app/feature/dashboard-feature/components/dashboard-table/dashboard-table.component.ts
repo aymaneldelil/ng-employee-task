@@ -1,9 +1,8 @@
-import { CdkTableDataSourceInput } from '@angular/cdk/table';
 import {
+  AfterViewInit,
   Component,
   Input,
   OnInit,
-  TemplateRef,
   ViewChild,
 } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
@@ -23,7 +22,7 @@ import { EmployeeDialogComponent } from '../employee-dialog/employee-dialog.comp
   templateUrl: './dashboard-table.component.html',
   styleUrls: ['./dashboard-table.component.scss'],
 })
-export class DashboardTableComponent implements OnInit {
+export class DashboardTableComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = [
     'id',
     'firstName',
@@ -38,8 +37,6 @@ export class DashboardTableComponent implements OnInit {
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
-  // @Input()
-  // dataSource!: CdkTableDataSourceInput<Iemployee>;
   @Input()
   dataSource!: MatTableDataSource<Iemployee>;
 
@@ -47,13 +44,16 @@ export class DashboardTableComponent implements OnInit {
     this.getEmployeeList();
   }
   //-------------------------------------------------------------------------------------------------------------------------------------------
+  ngAfterViewInit(): void {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+  //-------------------------------------------------------------------------------------------------------------------------------------------
   private getEmployeeList() {
     return this._dashBoardSVC.getEmployeeList$().subscribe({
       next: (res) => {
         console.log(' Need to updata The Table');
         this.dataSource = new MatTableDataSource(res);
-        this.dataSource.sort = this.sort;
-        this.dataSource.paginator = this.paginator;
       },
       error: console.log,
     });
@@ -61,8 +61,7 @@ export class DashboardTableComponent implements OnInit {
 
   constructor(
     private _dialog: MatDialog,
-    // private _dbSVC: DummydatabasesService,
-    private _dashBoardSVC:DashboardService,
+    private _dashBoardSVC: DashboardService,
     private _snackBar: MatSnackBar
   ) {}
   //-------------------------------------------------------------------------------------------------------------------------------------------
@@ -78,12 +77,11 @@ export class DashboardTableComponent implements OnInit {
 
   //-------------------------------------------------------------------------------------------------------------------------------------------------
 
-
   openFilterDialog() {
     const dialogRef = this._dialog.open(DashboardFilterComponent);
     dialogRef.afterClosed().subscribe({
       next: (result) => {
-        console.log('in table' , result.data);
+        console.log('in table', result.data);
         this.dataSource.filter = result.data;
         if (this.dataSource.paginator) {
           this.dataSource.paginator.firstPage();
